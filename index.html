@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To-Do List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <h2>To-Do List</h2>
+        <div class="form-group">
+            <label for="usr">Yapılacak İş Ekle</label>
+            <input type="text" v-model="workName" @keyup.enter="addWork" class="form-control" id="usr">
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Yapılacak İşler</h2>
+        <div class="list-group">
+            <a class="list-group-item" v-for="(work,index) in list"> {{ work }}
+                <button class="btn btn-danger btn-xs pull-right" @click="workDelete(index)">Sil</button></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el : "#app",
+        data : {
+            workName : "",
+            list : []
+        },
+        methods : {
+            addWork(){
+
+                if (this.workName==""){
+                    alert("Boş Kayıt Eklenemez");
+                }else{
+                    this.list.push(this.workName);
+                    document.getElementById("usr").innerHTML="";
+                }
+            },
+            workDelete(index){
+                this.list.splice(index,1);
+            }
+        },
+    });
+</script>
+
+</body>
+</html>
